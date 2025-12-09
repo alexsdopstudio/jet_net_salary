@@ -79,7 +79,7 @@
           </div>
           <button
             onclick="calcola()"
-            class="mt-auto w-full bg-[#11150b] text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 active:scale-[0.98]"
+            class="mt-auto w-full bg-[#11150b] text-white font-bold py-4 rounded-xl transition shadow-lg shadow-blue-200 active:scale-[0.98]"
           >
             Calcola
           </button>
@@ -88,7 +88,7 @@
             <h4
               class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4"
             >
-              Parametri Calcolo
+              Assunzioni di Calcolo
             </h4>
 
             <div class="grid grid-cols-2 gap-x-3 gap-y-5">
@@ -104,16 +104,16 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     ></path>
                   </svg>
                   <p class="text-[10px] font-bold uppercase text-slate-400">
-                    Contratto
+                    Profilo
                   </p>
                 </div>
                 <p class="text-xs font-bold text-slate-800">Indeterminato</p>
                 <p class="text-[10px] text-slate-500 leading-tight">
-                  365 gg, No carichi
+                  365 gg lavorati, no apprensidistato, no carichi familiari
                 </p>
               </div>
 
@@ -139,12 +139,37 @@
                     ></path>
                   </svg>
                   <p class="text-[10px] font-bold uppercase text-slate-400">
-                    Residenza
+                    Area Fiscale
                   </p>
                 </div>
                 <p class="text-xs font-bold text-slate-800">Milano (MI)</p>
                 <p class="text-[10px] text-slate-500 leading-tight">
                   Addiz. 0,8% (>23k)
+                </p>
+              </div>
+
+              <div class="group">
+                <div class="flex items-center gap-1.5 mb-1 text-red-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <p class="text-[10px] font-bold uppercase text-slate-400">
+                    Previdenza
+                  </p>
+                </div>
+                <p class="text-xs font-bold text-slate-800">Aliquota 9,19%</p>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  Regime Ordinario
                 </p>
               </div>
 
@@ -160,43 +185,16 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      d="M9 7h6m0 3.666V19.124a1.768 1.768 0 01-1.768 1.768H8.768A1.768 1.768 0 017 19.124V9.071M12 11.5a4.5 4.5 0 10-9 0 4.5 4.5 0 009 0z"
                     ></path>
                   </svg>
                   <p class="text-[10px] font-bold uppercase text-slate-400">
-                    Taglio Cuneo
+                    Regime '25
                   </p>
                 </div>
-                <p class="text-xs font-bold text-slate-800">
-                  Attivo (legge 2024)
-                </p>
+                <p class="text-xs font-bold text-slate-800">Nuovo Cuneo</p>
                 <p class="text-[10px] text-slate-500 leading-tight">
-                  13esima esclusa, 14esima inclusa
-                </p>
-              </div>
-
-              <div class="group">
-                <div class="flex items-center gap-1.5 mb-1 text-orange-600">
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <p class="text-[10px] font-bold uppercase text-slate-400">
-                    Bonus 100€
-                  </p>
-                </div>
-                <p class="text-xs font-bold text-slate-800">Automatico</p>
-                <p class="text-[10px] text-slate-500 leading-tight">
-                  Solo redditi &lt;15k
+                  Bonus (&lt;20k) + Detraz.
                 </p>
               </div>
             </div>
@@ -230,7 +228,7 @@
               class="text-xs text-emerald-600 mt-2 font-medium"
               id="uiBonusBag"
             >
-              Include Bonus 100€ se spettante
+              Compreso di detrazioni
             </p>
           </div>
 
@@ -347,7 +345,7 @@
           return;
         }
 
-        // --- 3. CALCULATION ENGINE (Business Logic) ---
+        // --- 3 (Business Logic) ---
 
         // 3.1 INPS (Standard 9.19%)
         const aliquotaInps = 0.0919;
@@ -413,7 +411,7 @@
 
         // Comunale calc
         let addCom = 0;
-        if (imponibileFiscale > 21000) addCom = imponibileFiscale * 0.008;
+        if (imponibileFiscale > 23000) addCom = imponibileFiscale * 0.008;
 
         // 3.7 Trattamento Integrativo
         let trattInt = 0;
@@ -440,11 +438,10 @@
           taxBar.style.width = Math.min(pressione, 100) + "%";
         }
 
-        // --- 5. TABLE DATA CONSTRUCTION (The Clean Way) ---
+        // --- 5. TABLE DATA CONSTRUCTION  ---
         const tbody = document.getElementById("tableBody");
         if (!tbody) return;
 
-        // Define URLs as constants for cleaner reading
         const SOURCES = {
           INPS: "https://www.fiscozen.it/guide/costo-contributi-ivs/#:~:text=La%20percentuale%20che%20il%20datore,quindi%20sul%20tuo%20compenso%20lordo.",
           ADE_CIRCOLARE:
@@ -476,14 +473,13 @@
             label: "IRPEF Netta",
             desc: `
         <div class="flex flex-col items-end gap-1">
-          <span>Imposta Lorda: ${formatMoneyNoDec(irpefLorda)}</span>
-          <span class="text-emerald-600 font-medium">Sconto Detrazioni: ${formatMoneyNoDec(
+          <span>Imposta Lorda: ${formatMoney(irpefLorda)}</span>
+          <span class="text-emerald-600 font-medium">Sconto Detrazioni: ${formatMoney(
             detrazioniTotali
           )}</span>
         </div>`,
             value: -irpefNetta,
             textStyle: "text-red-600",
-            isHtmlDesc: true, // Flag to render desc as HTML
             link: SOURCES.ADE_CIRCOLARE,
             rowBg: "bg-slate-50/50",
           },
@@ -496,7 +492,7 @@
           },
           {
             label: "Addiz. Comunale",
-            desc: "Milano (0,8% sopra 21k)",
+            desc: "Milano (0,8% sopra 23k)",
             value: -addCom,
             textStyle: "text-red-600",
             link: SOURCES.COMUNE,
@@ -534,7 +530,7 @@
           </div>
         </td>
         <td class="px-6 py-4 text-right text-xs text-slate-500">
-          ${row.isHtmlDesc ? row.desc : row.desc}
+          ${row.desc}
         </td>
         <td class="px-6 py-4 text-right font-mono ${row.textStyle}">
            ${row.value > 0 && !row.isPositive ? "+" : ""}${formatMoney(
