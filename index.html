@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcolatore stipendio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-900 min-h-screen py-10 px-4 flex justify-center"
+  >
+    <main
+      class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-slate-200"
+    >
+      <div
+        class="p-8 bg-slate-100 lg:col-span-4 border-r border-slate-200 flex flex-col gap-8"
+      >
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-slate-900">
+            Simulatore <br /><span class="text-[#11150b]">Stipendio netto</span>
+          </h1>
+        </div>
+
+        <div class="space-y-6">
+          <div>
+            <label
+              class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2"
+              >RAL Annuale (€)</label
+            >
+            <input
+              type="number"
+              id="ralInput"
+              class="w-full p-4 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#11150b] focus:border-transparent outline-none text-xl font-mono shadow-sm transition"
+              value="25000"
+              step="1000"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2"
+              >Mensilità</label
+            >
+            <div class="grid grid-cols-2 gap-2 bg-slate-200 p-1 rounded-xl">
+              <label class="cursor-pointer text-center">
+                <input
+                  type="radio"
+                  name="mensilita"
+                  value="13"
+                  checked
+                  class="peer sr-only"
+                />
+                <div
+                  class="py-2 rounded-lg peer-checked:bg-white peer-checked:text-[#11150b] peer-checked:shadow-sm text-slate-500 font-medium text-sm transition"
+                >
+                  13 Mesi
+                </div>
+              </label>
+              <label class="cursor-pointer text-center">
+                <input
+                  type="radio"
+                  name="mensilita"
+                  value="14"
+                  class="peer sr-only"
+                />
+                <div
+                  class="py-2 rounded-lg peer-checked:bg-white peer-checked:text-[#11150b] peer-checked:shadow-sm text-slate-500 font-medium text-sm transition"
+                >
+                  14 Mesi
+                </div>
+              </label>
+            </div>
+          </div>
+          <button
+            onclick="calcola()"
+            class="mt-auto w-full bg-[#11150b] text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 active:scale-[0.98]"
+          >
+            Calcola
+          </button>
+
+          <div class="mt-6 pt-6 border-t border-slate-200">
+            <h4
+              class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4"
+            >
+              Parametri Calcolo
+            </h4>
+
+            <div class="grid grid-cols-2 gap-x-3 gap-y-5">
+              <div class="group">
+                <div class="flex items-center gap-1.5 mb-1 text-blue-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  <p class="text-[10px] font-bold uppercase text-slate-400">
+                    Contratto
+                  </p>
+                </div>
+                <p class="text-xs font-bold text-slate-800">Indeterminato</p>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  365 gg, No carichi
+                </p>
+              </div>
+
+              <div class="group">
+                <div class="flex items-center gap-1.5 mb-1 text-purple-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
+                  </svg>
+                  <p class="text-[10px] font-bold uppercase text-slate-400">
+                    Residenza
+                  </p>
+                </div>
+                <p class="text-xs font-bold text-slate-800">Milano (MI)</p>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  Addiz. 0,8% (>23k)
+                </p>
+              </div>
+
+              <div class="group">
+                <div class="flex items-center gap-1.5 mb-1 text-emerald-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <p class="text-[10px] font-bold uppercase text-slate-400">
+                    Taglio Cuneo
+                  </p>
+                </div>
+                <p class="text-xs font-bold text-slate-800">
+                  Attivo (legge 2024)
+                </p>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  13esima esclusa, 14esima inclusa
+                </p>
+              </div>
+
+              <div class="group">
+                <div class="flex items-center gap-1.5 mb-1 text-orange-600">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                  <p class="text-[10px] font-bold uppercase text-slate-400">
+                    Bonus 100€
+                  </p>
+                </div>
+                <p class="text-xs font-bold text-slate-800">Automatico</p>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  Solo redditi &lt;15k
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-8 lg:col-span-8 bg-white flex flex-col gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div
+            class="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 relative overflow-hidden"
+          >
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+              <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+              </svg>
+            </div>
+            <p
+              class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1"
+            >
+              Netto Mensile Stimato
+            </p>
+            <p
+              class="text-5xl font-bold text-emerald-700 tracking-tighter"
+              id="uiMonthly"
+            >
+              --
+            </p>
+            <p
+              class="text-xs text-emerald-600 mt-2 font-medium"
+              id="uiBonusBag"
+            >
+              Include Bonus 100€ se spettante
+            </p>
+          </div>
+
+          <div
+            class="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col justify-center"
+          >
+            <div class="flex justify-between items-end mb-2">
+              <p
+                class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+              >
+                Netto Annuale
+              </p>
+              <span class="text-xs font-mono text-slate-300">EUR</span>
+            </div>
+            <p
+              class="text-3xl font-bold text-slate-700 tracking-tight"
+              id="uiAnnual"
+            >
+              --
+            </p>
+            <div
+              class="w-full bg-slate-100 rounded-full h-1.5 mt-4 overflow-hidden"
+            >
+              <div
+                class="bg-[#11150b] h-1.5 rounded-full"
+                id="taxBar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <p class="text-xs text-slate-400 mt-2 text-right">
+              Pressione Fiscale: <span id="taxPressure">--%</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex-grow">
+          <h3
+            class="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4 text-slate-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+              ></path>
+            </svg>
+            Analisi Dettagliata
+          </h3>
+          <div class="overflow-hidden rounded-xl border border-slate-200">
+            <table class="w-full text-sm">
+              <thead
+                class="bg-slate-50 text-xs text-slate-500 uppercase font-semibold"
+              >
+                <tr>
+                  <th class="px-6 py-3 text-left">Voce</th>
+                  <th class="px-6 py-3 text-right">Dettaglio</th>
+                  <th class="px-6 py-3 text-right">Importo Annuo</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100" id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function calcola() {
+        // --- 1. UTILS & FORMATTERS ---
+        const formatMoney = (val) =>
+          new Intl.NumberFormat("it-IT", {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 2,
+          }).format(val);
+
+        const formatMoneyNoDec = (val) =>
+          new Intl.NumberFormat("it-IT", {
+            style: "currency",
+            currency: "EUR",
+            maximumFractionDigits: 0,
+          }).format(val);
+
+        const generateLinkIcon = (url) => {
+          if (!url) return "";
+          return `
+      <a href="${url}" target="_blank" class="text-slate-300 hover:text-blue-600 ml-2 transition-colors" title="Vedi Fonte Ufficiale">
+        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+      </a>`;
+        };
+
+        // --- 2. INPUT RETRIEVAL ---
+        const ralInput = document.getElementById("ralInput");
+        if (!ralInput) return;
+
+        const ral = parseFloat(ralInput.value);
+        const radioMensilita = document.querySelector(
+          'input[name="mensilita"]:checked'
+        );
+        const numeroMensilita = radioMensilita
+          ? parseInt(radioMensilita.value)
+          : 13;
+
+        if (!ral || ral <= 0) {
+          alert("Inserisci una RAL valida");
+          return;
+        }
+
+        // --- 3. CALCULATION ENGINE (Business Logic) ---
+
+        // 3.1 INPS (Standard 9.19%)
+        const aliquotaInps = 0.0919;
+        const contributiInpsTotali = ral * aliquotaInps;
+
+        // 3.2 Bonus Cuneo (< 20k)
+        let bonusCuneo = 0;
+        if (ral <= 20000) {
+          let perc = 0;
+          if (ral <= 8500) perc = 0.071;
+          else if (ral <= 15000) perc = 0.053;
+          else perc = 0.048;
+          bonusCuneo = ral * perc;
+        }
+
+        // 3.3 Imponibile Fiscale
+        const imponibileFiscale = ral - contributiInpsTotali;
+
+        // 3.4 IRPEF Lorda
+        let irpefLorda = 0;
+        if (imponibileFiscale <= 28000) {
+          irpefLorda = imponibileFiscale * 0.23;
+        } else if (imponibileFiscale <= 50000) {
+          irpefLorda = 6440 + (imponibileFiscale - 28000) * 0.35;
+        } else {
+          irpefLorda = 14140 + (imponibileFiscale - 50000) * 0.43;
+        }
+
+        // 3.5 Detrazioni
+        let detrDip = 0;
+        if (imponibileFiscale <= 15000) detrDip = 1955;
+        else if (imponibileFiscale <= 28000)
+          detrDip = 1910 + 1190 * ((28000 - imponibileFiscale) / 13000);
+        else if (imponibileFiscale <= 50000)
+          detrDip = 1910 * ((50000 - imponibileFiscale) / 22000);
+
+        let detrExtra = 0;
+        if (ral > 20000 && ral <= 32000) detrExtra = 1000;
+        else if (ral > 32000 && ral <= 40000)
+          detrExtra = 1000 * ((40000 - ral) / 8000);
+
+        const detrazioniTotali = detrDip + detrExtra;
+        const irpefNetta = Math.max(0, irpefLorda - detrazioniTotali);
+
+        // 3.6 Addizionali
+        let addReg = 0;
+        let res = imponibileFiscale;
+
+        // Regionale calc
+        const steps = [
+          { limit: 15000, rate: 0.0123 },
+          { limit: 13000, rate: 0.0158 },
+          { limit: 22000, rate: 0.0172 },
+          { limit: Infinity, rate: 0.0173 },
+        ];
+
+        for (const step of steps) {
+          if (res <= 0) break;
+          const taxable = Math.min(res, step.limit);
+          addReg += taxable * step.rate;
+          res -= taxable;
+        }
+
+        // Comunale calc
+        let addCom = 0;
+        if (imponibileFiscale > 21000) addCom = imponibileFiscale * 0.008;
+
+        // 3.7 Trattamento Integrativo
+        let trattInt = 0;
+        if (imponibileFiscale <= 15000) trattInt = 1200;
+
+        // 3.8 Totals
+        const totaleTrattenute =
+          contributiInpsTotali + irpefNetta + addReg + addCom;
+        const nettoAnnuale = ral - totaleTrattenute + trattInt + bonusCuneo;
+        const nettoMensile = nettoAnnuale / numeroMensilita;
+
+        // --- 4. DOM UPDATES (Header & Bars) ---
+        document.getElementById("uiMonthly").textContent =
+          formatMoneyNoDec(nettoMensile);
+        document.getElementById("uiAnnual").textContent =
+          formatMoneyNoDec(nettoAnnuale);
+
+        const pressione = (1 - nettoAnnuale / ral) * 100;
+        const taxBar = document.getElementById("taxBar");
+        const taxPressTxt = document.getElementById("taxPressure");
+
+        if (taxBar && taxPressTxt) {
+          taxPressTxt.innerText = pressione.toFixed(1) + "%";
+          taxBar.style.width = Math.min(pressione, 100) + "%";
+        }
+
+        // --- 5. TABLE DATA CONSTRUCTION (The Clean Way) ---
+        const tbody = document.getElementById("tableBody");
+        if (!tbody) return;
+
+        // Define URLs as constants for cleaner reading
+        const SOURCES = {
+          INPS: "https://www.fiscozen.it/guide/costo-contributi-ivs/#:~:text=La%20percentuale%20che%20il%20datore,quindi%20sul%20tuo%20compenso%20lordo.",
+          ADE_CIRCOLARE:
+            "https://www.agenziaentrate.gov.it/portale/documents/20143/8410823/Circolare+lavoro+dipendente+LB2025+DD+IRPEF+n.+4+del+16+maggio+2025.pdf/36979eaa-9fc5-a4ec-a7aa-136497c53f91",
+          REGIONE:
+            "https://www.regione.lombardia.it/wps/portal/istituzionale/HP/DettaglioRedazionale/servizi-e-informazioni/cittadini/tributi-e-canoni/addizionale-irpef#:~:text=da%20a,1,73%",
+          COMUNE:
+            "https://www.comune.milano.it/argomenti/tributi/addizionale-comunale-irpef/#:~:text=Acconto:%20ammonta%20al,riconosciuti%20dall'Irpef%20stessa.",
+        };
+
+        // Build the array of row objects
+        // We use .filter(Boolean) to strip out rows that shouldn't appear (like bonus if 0)
+        const tableRows = [
+          {
+            label: "RAL (Lordo)",
+            desc: "Punto di partenza",
+            value: ral,
+            isPositive: true,
+            textStyle: "text-slate-900 font-bold",
+          },
+          {
+            label: "Contributi INPS",
+            desc: "9.19% ai fini pensionistici",
+            value: -contributiInpsTotali,
+            textStyle: "text-red-600",
+            link: SOURCES.INPS,
+          },
+          {
+            label: "IRPEF Netta",
+            desc: `
+        <div class="flex flex-col items-end gap-1">
+          <span>Imposta Lorda: ${formatMoneyNoDec(irpefLorda)}</span>
+          <span class="text-emerald-600 font-medium">Sconto Detrazioni: ${formatMoneyNoDec(
+            detrazioniTotali
+          )}</span>
+        </div>`,
+            value: -irpefNetta,
+            textStyle: "text-red-600",
+            isHtmlDesc: true, // Flag to render desc as HTML
+            link: SOURCES.ADE_CIRCOLARE,
+            rowBg: "bg-slate-50/50",
+          },
+          {
+            label: "Addiz. Regionale",
+            desc: "Lombardia (Progressiva)",
+            value: -addReg,
+            textStyle: "text-red-600",
+            link: SOURCES.REGIONE,
+          },
+          {
+            label: "Addiz. Comunale",
+            desc: "Milano (0,8% sopra 21k)",
+            value: -addCom,
+            textStyle: "text-red-600",
+            link: SOURCES.COMUNE,
+          },
+          // Conditional Rows
+          bonusCuneo > 0 && {
+            label: "Bonus Cuneo 2025",
+            desc: "Somma detassata (Redditi < 20k)",
+            value: bonusCuneo,
+            textStyle: "text-emerald-600 font-bold",
+            link: SOURCES.ADE_CIRCOLARE,
+            rowBg: "bg-emerald-50/30",
+          },
+          trattInt > 0 && {
+            label: "Tratt. Integrativo",
+            desc: "Ex Bonus Renzi (Redditi < 15k)",
+            value: trattInt,
+            textStyle: "text-emerald-600 font-bold",
+            link: SOURCES.ADE_CIRCOLARE,
+            rowBg: "bg-emerald-50/30",
+          },
+        ].filter(Boolean);
+
+        // --- 6. RENDER LOOP ---
+        tbody.innerHTML = tableRows
+          .map(
+            (row) => `
+      <tr class="hover:bg-slate-50 border-b border-slate-100 transition group ${
+        row.rowBg || ""
+      }">
+        <td class="px-6 py-4 font-medium text-slate-700">
+          <div class="flex items-center gap-2">
+            ${row.label}
+            ${generateLinkIcon(row.link)}
+          </div>
+        </td>
+        <td class="px-6 py-4 text-right text-xs text-slate-500">
+          ${row.isHtmlDesc ? row.desc : row.desc}
+        </td>
+        <td class="px-6 py-4 text-right font-mono ${row.textStyle}">
+           ${row.value > 0 && !row.isPositive ? "+" : ""}${formatMoney(
+              row.value
+            )}
+        </td>
+      </tr>
+    `
+          )
+          .join("");
+      }
+
+      // Init
+      calcola();
+    </script>
+  </body>
+</html>
