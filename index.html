@@ -423,7 +423,7 @@
         const nettoAnnuale = ral - totaleTrattenute + trattInt + bonusCuneo;
         const nettoMensile = nettoAnnuale / numeroMensilita;
 
-        // --- 4. DOM UPDATES (Header & Bars) ---
+        // --- 4. DOM UPDATES
         document.getElementById("uiMonthly").textContent =
           formatMoneyNoDec(nettoMensile);
         document.getElementById("uiAnnual").textContent =
@@ -452,8 +452,6 @@
             "https://www.comune.milano.it/argomenti/tributi/addizionale-comunale-irpef/#:~:text=Acconto:%20ammonta%20al,riconosciuti%20dall'Irpef%20stessa.",
         };
 
-        // Build the array of row objects
-        // We use .filter(Boolean) to strip out rows that shouldn't appear (like bonus if 0)
         const tableRows = [
           {
             label: "RAL (Lordo)",
@@ -543,7 +541,6 @@
           .join("");
       }
 
-      // Init
       calcola();
     </script>
   </body>
