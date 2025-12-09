@@ -283,15 +283,15 @@
             </svg>
             Analisi Dettagliata
           </h3>
-          <div class="overflow-hidden rounded-xl border border-slate-200">
+          <div class="overflow-x-auto rounded-xl border border-slate-200">
             <table class="w-full text-sm">
               <thead
                 class="bg-slate-50 text-xs text-slate-500 uppercase font-semibold"
               >
                 <tr>
-                  <th class="px-6 py-3 text-left">Voce</th>
-                  <th class="px-6 py-3 text-right">Dettaglio</th>
-                  <th class="px-6 py-3 text-right">Importo Annuo</th>
+                  <th class="px-4 md:px-6 py-3 text-left">Voce</th>
+                  <th class="px-4 md:px-6 py-3 text-right">Dettaglio</th>
+                  <th class="px-4 md:px-6 py-3 text-right">Importo Annuo</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100" id="tableBody"></tbody>
@@ -523,22 +523,23 @@
         ].filter(Boolean);
 
         // --- 6. RENDER LOOP ---
+        // UPDATED: Added px-4 md:px-6 for responsive padding
         tbody.innerHTML = tableRows
           .map(
             (row) => `
       <tr class="hover:bg-slate-50 border-b border-slate-100 transition group ${
         row.rowBg || ""
       }">
-        <td class="px-6 py-4 font-medium text-slate-700">
+        <td class="px-4 md:px-6 py-4 font-medium text-slate-700">
           <div class="flex items-center gap-2">
             ${row.label}
             ${generateLinkIcon(row.link)}
           </div>
         </td>
-        <td class="px-6 py-4 text-right text-xs text-slate-500">
+        <td class="px-4 md:px-6 py-4 text-right text-xs text-slate-500">
           ${row.desc}
         </td>
-        <td class="px-6 py-4 text-right font-mono ${row.textStyle}">
+        <td class="px-4 md:px-6 py-4 text-right font-mono ${row.textStyle}">
            ${row.value > 0 && !row.isPositive ? "+" : ""}${formatMoney(
               row.value
             )}
