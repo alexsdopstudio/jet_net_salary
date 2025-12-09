@@ -348,7 +348,10 @@
         // --- 3 (Business Logic) ---
 
         // 3.1 INPS (Standard 9.19%)
-        const aliquotaInps = 0.0919;
+        let aliquotaInps = 0.0919;
+        if (ral > 47379) {
+          aliquotaInps = 0.1019;
+        }
         const contributiInpsTotali = ral * aliquotaInps;
 
         // 3.2 Bonus Cuneo (< 20k)
@@ -452,6 +455,11 @@
             "https://www.comune.milano.it/argomenti/tributi/addizionale-comunale-irpef/#:~:text=Acconto:%20ammonta%20al,riconosciuti%20dall'Irpef%20stessa.",
         };
 
+        const descInps =
+          ral > 47379
+            ? "10.19% ai fini pensionistici"
+            : "9.19% ai fini pensionistici";
+
         const tableRows = [
           {
             label: "RAL (Lordo)",
@@ -462,7 +470,7 @@
           },
           {
             label: "Contributi INPS",
-            desc: "9.19% ai fini pensionistici",
+            desc: descInps,
             value: -contributiInpsTotali,
             textStyle: "text-red-600",
             link: SOURCES.INPS,
